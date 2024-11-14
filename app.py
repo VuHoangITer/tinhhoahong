@@ -146,15 +146,6 @@ def input_form():
     return render_template('input_form.html')
 
 
-from flask import Flask, request, render_template, send_file
-from werkzeug.utils import secure_filename
-import pandas as pd
-import os
-from io import BytesIO
-
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'  # Thư mục lưu trữ file tải lên
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
