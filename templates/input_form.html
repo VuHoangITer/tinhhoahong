@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nhập Dữ Liệu</title>
+    <style>
+      /* Thiết lập font chữ và nền cho toàn trang */
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #e8f0fe;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+      }
+      /* Tiêu đề */
+      h1,
+      h2 {
+        text-align: center;
+        color: #1a237e;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Container chính */
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 90%;
+        max-width: 800px;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Phần Form */
+      .form-section {
+        padding: 20px;
+        background-color: #f9fafc;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      label {
+        font-size: 15px;
+        margin-bottom: 8px;
+        display: block;
+        color: #3e4c59;
+        font-weight: 500;
+      }
+
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 20px;
+        border: 1px solid #d0d4d9;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #f5f5f5;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+      }
+
+      input[type="number"]:focus,
+      select:focus {
+        outline: none;
+        border-color: #1a73e8;
+        background-color: #fff;
+      }
+
+      /* Nút */
+      button {
+        padding: 12px 20px;
+        background-color: #1a73e8;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        text-align: center;
+      }
+
+      button:hover {
+        background-color: #1565c0;
+      }
+
+      /* Kết quả tính toán */
+      .result-section {
+        padding: 20px;
+        background-color: #f1f8ff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      ul li {
+        background-color: #e3f2fd;
+        margin: 8px 0;
+        padding: 12px;
+        border-radius: 6px;
+        color: #0d47a1;
+      }
+
+      .no-result {
+        font-size: 18px;
+        color: #555;
+        margin: 0;
+        text-align: center;
+      }
+
+      /* Liên kết */
+      a {
+        color: #1a73e8;
+        text-decoration: none;
+        padding: 8px 16px;
+        display: inline-block;
+        font-weight: 500;
+      }
+
+      a:hover {
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        border-radius: 6px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0; /* Đảm bảo không có khoảng cách giữa các ô */
+        margin-top: 20px;
+        border: 1px solid #ddd; /* Đường viền ngoài cùng của bảng */
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd; /* Dấu phân cách giữa các ô */
+      }
+
+      th {
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        font-weight: bold;
+      }
+
+      td input[type="number"],
+      td select {
+        width: 90%;
+        padding: 8px;
+        border: 1px solid #d0d4d9;
+        border-radius: 6px;
+        background-color: #f5f5f5;
+      }
+
+      td button {
+        padding: 6px 12px;
+        background-color: #f44336;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      td button:hover {
+        background-color: #d32f2f;
+      }
+      /* Căn chỉnh tổng thể */
+.result-section {
+  width: 80%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Tiêu đề */
+.result-section h1 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #333;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Danh sách sản phẩm */
+.result-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.result-section li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.result-section li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Chia dòng kết quả */
+.result-section li strong {
+  color: #4CAF50;
+}
+
+.result-section .no-result {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Định dạng nút */
+.result-section a {
+  display: inline-block;
+  margin: 1rem 0.5rem 0;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: white;
+  background-color: #4CAF50;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.result-section a:hover {
+  background-color: #45a049;
+}
+
+/* Đường kẻ ngang */
+.result-section li strong {
+  display: block;
+  color: #666;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #4CAF50;
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+/* CSS cho trường nhập số tiền tặng khách */
+label[for="discount_amount"] {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+#discount_amount {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-size: 16px;
+    color: #333;
+}
+
+#discount_amount:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 4px;
+    font-style: italic;
+}
+.pagination-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.pagination-buttons button {
+  padding: 10px 20px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-buttons button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+.pagination-buttons button:hover:enabled {
+  background-color: #1565c0;
+}
+
+
+      /* Responsive cho di động */
+      @media (max-width: 768px) {
+        .container {
+          width: 100%;
+          padding: 15px;
+        }
+
+        button {
+          font-size: 14px;
+        }
+        #discount_amount {
+            max-width: 100%;
+            padding: 8px;
+        }
+        label[for="discount_amount"] {
+            font-size: 14px;
+        }
+        p {
+            font-size: 12px;
+        }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-section">
+        <form method="POST">
+          <h1>Nhập thông tin sản phẩm</h1>
+          <table id="product-table">
+            <thead>
+              <tr>
+                <th>Số lượng</th>
+                <th>Loại Sản Phẩm</th>
+                <th>Giá bán mỗi sản phẩm</th>
+                <th>Tổng tiền thu về</th>
+                <th>Xóa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="number" name="quantity[]" required min="1" />
+                </td>
+                <td>
+                  <select name="product_type[]" required>
+                    <option value="keo dán gạch bricon thông dụng - màu trắng">
+                      Keo dán gạch Bricon Thông Dụng - Màu Trắng
+                    </option>
+                    <option value="keo dán gạch bricon thông dụng - màu xám">
+                      Keo dán gạch Bricon Thông Dụng - Màu Xám
+                    </option>
+                    <option value="keo dán gạch bricon extra - màu trắng">
+                      Keo dán gạch Bricon Extra - Màu Trắng
+                    </option>
+                    <option value="keo dán gạch bricon extra - màu xám">
+                      Keo dán gạch Bricon Extra - Màu Xám
+                    </option>
+                    <option value="keo chà ron hộp 30kg/thùng">
+                      Keo chà ron hộp 30kg/thùng
+                    </option>
+                    <option value="keo chà ron 24 túi/thùng">
+                      Keo chà ron 24 túi/thùng
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <input type="number" name="selling_price[]" min="1" />
+                </td>
+                <td>
+                  <input type="number" name="total_amount[]" min="1" />
+                </td>
+                <td>
+                  <button type="button" onclick="removeRow(this)">Xóa</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="color: #555; font-size: 14px">
+            Chỉ cần nhập Giá bán mỗi sản phẩm	hoặc Tổng tiền thu về
+          </p>
+          <br />
+
+          <!-- Trường nhập số tiền tặng khách -->
+          <label for="discount_amount">Số tiền tặng khách (₫):</label>          <p style="color: #555; font-size: 14px">
+            Lưu ý:Nếu không có nhập 0
+          </p>
+          <input type="number" name="discount_amount" id="discount_amount" min="0" value="0" />
+
+
+          <br />
+          <br />
+          <button type="button" onclick="addRow()">Thêm Sản Phẩm</button>
+          <br />
+          <br />
+          <button type="submit">Tính Toán</button>
+        </form>
+      </div>
+
+      <div class="result-section">
+        <h1>Kết quả tính toán</h1>
+        
+        <!-- Kiểm tra nếu có kết quả tính toán -->
+        {% if results %}
+            <div id="product-results"></div>
+            <!-- Hiển thị số tiền tặng khách -->
+            <p><strong>Số tiền tặng khách:</strong> {{ discount_amount | int | tojson }}₫</p>
+            <!-- Nút chuyển sản phẩm -->
+            <div class="pagination-buttons">
+                <button id="prev-btn" onclick="prevProduct()" disabled>Trước</button>
+                <button id="next-btn" onclick="nextProduct()">Sau</button>
+            </div>
+        {% else %}
+            <p class="no-result">Chưa có kết quả tính toán.</p>
+            <div class="pagination-buttons" style="display: none;">
+                <button id="prev-btn" onclick="prevProduct()" disabled>Trước</button>
+                <button id="next-btn" onclick="nextProduct()" disabled>Sau</button>
+            </div>
+        {% endif %}
+        
+        <br />
+        <a href="/">Reset bảng</a>
+        <a href="/upload">Tải file Excel</a>
+    </div>
+    
+      
+
+    <script>
+      function addRow() {
+        let table = document.getElementById('product-table').getElementsByTagName('tbody')[0];
+        let newRow = table.rows[0].cloneNode(true);
+        table.appendChild(newRow);
+      }
+
+      function removeRow(button) {
+        let row = button.parentElement.parentElement;
+        if (row.parentElement.rows.length > 1) {
+          row.remove();
+        }
+      }
+
+      {% if error %}
+      alert("{{ error }}");
+      {% endif %}
+
+      const productsInfo = {{ products_info|default([])|tojson }};
+      const results = {{ results|default([])|tojson }};
+      let currentProductIndex = 0;
+  
+      function displayProduct(index) {
+          const productResult = document.getElementById("product-results");
+          const productInfo = productsInfo[index];
+          const productResultData = results[index];
+
+            // Thứ tự hiển thị các mục
+          const orderedKeys = [
+          "Tổng chi phí phải thu(Giá đề xuất)",
+          "Tổng chi phí thực thu(Giá bán thực tế)",
+          "Phí Ship(Đàm phán)",
+          "Hoa hồng cơ bản(Tiền chiết khấu)",
+          "Tiền chênh lệch",
+          "Tổng hoa hồng"
+          ];
+  
+          let htmlContent = `
+              <ul>
+                  <li>
+                      <p class="nowrap">
+                          <strong>Sản phẩm:</strong> <span class="highlight">${productInfo.product_type}</span> | 
+                          <strong>Số lượng:</strong> <span class="highlight">${productInfo.quantity}</span> | 
+                          <strong>Giá bán mỗi sản phẩm:</strong> <span class="highlight">${productInfo.selling_price.toLocaleString()}₫</span>
+                      </p>
+                      <ul>
+                          ${orderedKeys
+                            .filter((key) => key in productResultData) // Đảm bảo chỉ lấy các mục có trong productResultData
+                            .map((key) => `<li><strong>${key}:</strong> ${productResultData[key]}</li>`)
+                            .join('')}
+                      </ul>
+                  </li>
+              </ul>
+          `;
+          
+          productResult.innerHTML = htmlContent;
+          
+          document.getElementById("prev-btn").disabled = index === 0;
+          document.getElementById("next-btn").disabled = index === productsInfo.length - 1;
+      }
+  
+      function prevProduct() {
+          if (currentProductIndex > 0) {
+              currentProductIndex--;
+              displayProduct(currentProductIndex);
+          }
+      }
+  
+      function nextProduct() {
+          if (currentProductIndex < productsInfo.length - 1) {
+              currentProductIndex++;
+              displayProduct(currentProductIndex);
+          }
+      }
+  
+      // Hiển thị sản phẩm đầu tiên khi tải trang
+      displayProduct(currentProductIndex);
+    </script>
+  </body>
+</html>
