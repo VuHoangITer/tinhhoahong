@@ -330,27 +330,67 @@ p {
 }
 
 
-      /* Responsive cho di động */
-      @media (max-width: 768px) {
-        .container {
-          width: 100%;
-          padding: 15px;
-        }
+/* Responsive cho di động */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 15px;
+  }
 
-        button {
-          font-size: 14px;
-        }
-        #discount_amount {
-            max-width: 100%;
-            padding: 8px;
-        }
-        label[for="discount_amount"] {
-            font-size: 14px;
-        }
-        p {
-            font-size: 12px;
-        }
-    }
+  h1, h2 {
+    font-size: 1.4em;
+  }
+
+  /* Giảm kích thước các nút */
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* Đảm bảo độ rộng của các trường nhập liệu */
+  input[type="number"],
+  select,
+  #discount_amount {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  /* Bảng cho di động */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* Chuyển mỗi hàng thành một khối độc lập */
+  tr {
+    margin-bottom: 10px;
+  }
+
+  /* Hiển thị tiêu đề cột trước nội dung */
+  td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    color: #333;
+  }
+
+  /* Thu nhỏ font của nhãn và các đoạn mô tả */
+  label[for="discount_amount"],
+  p {
+    font-size: 14px;
+  }
+
+  /* Căn chỉnh nút phân trang */
+  .pagination-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pagination-buttons button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -370,10 +410,10 @@ p {
             </thead>
             <tbody>
               <tr>
-                <td>
+                <td data-label="Số lượng">
                   <input type="number" name="quantity[]" required min="1" />
                 </td>
-                <td>
+                <td data-label="Loại Sản Phẩm">
                   <select name="product_type[]" required>
                     <option value="keo dán gạch bricon thông dụng - màu trắng">
                       Keo dán gạch Bricon Thông Dụng - Màu Trắng
@@ -395,13 +435,13 @@ p {
                     </option>
                   </select>
                 </td>
-                <td>
+                <td data-label="Giá bán mỗi sản phẩm">
                   <input type="number" name="selling_price[]" min="1" />
                 </td>
-                <td>
+                <td data-label="Tổng tiền thu về">
                   <input type="number" name="total_amount[]" min="1" />
                 </td>
-                <td>
+                <td data-label="Xóa">
                   <button type="button" onclick="removeRow(this)">Xóa</button>
                 </td>
               </tr>
