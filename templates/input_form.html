@@ -389,6 +389,42 @@ p {
     width: 100%;
     margin-bottom: 8px;
   }
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  /* Ẩn phần tiêu đề cột để tránh tràn khung trên màn hình nhỏ */
+  thead tr {
+    display: none;
+  }
+
+  /* Tạo hiệu ứng stack các ô dữ liệu, với nhãn ở bên trái mỗi hàng */
+  tbody tr {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+
+  /* Định dạng cho nhãn tiêu đề của mỗi ô */
+  tbody tr td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #3e4c59;
+  }
+}
 }
 
     </style>
@@ -530,7 +566,7 @@ p {
           "Phí Ship(Đàm phán)",
           "Hoa hồng cơ bản(Tiền chiết khấu)",
           "Tiền chênh lệch",
-          "Tổng hoa hồng"
+          "Tổng hoa hồng(Lợi nhuận)"
           ];
   
           let htmlContent = `
