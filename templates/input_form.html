@@ -407,8 +407,8 @@ p {
           <table id="product-table">
             <thead>
               <tr>
-                <th>Số lượng</th>
                 <th>Loại Sản Phẩm</th>
+                <th>Số lượng</th>
                 <th>Giá bán mỗi sản phẩm</th>
                 <th>Tổng tiền thu về</th>
                 <th>Xóa</th>
@@ -416,9 +416,6 @@ p {
             </thead>
             <tbody>
               <tr>
-                <td data-label="Số lượng">
-                  <input type="number" name="quantity[]" required min="1" />
-                </td>
                 <td data-label="Loại Sản Phẩm">
                   <select name="product_type[]" required>
                     <option value="keo dán gạch bricon thông dụng - màu trắng">
@@ -440,6 +437,9 @@ p {
                       Keo chà ron 24 túi/thùng
                     </option>
                   </select>
+                </td>
+                <td data-label="Số lượng">
+                  <input type="number" name="quantity[]" required min="1" />
                 </td>
                 <td data-label="Giá bán mỗi sản phẩm">
                   <input type="number" name="selling_price[]" min="1" />
