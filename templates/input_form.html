@@ -411,6 +411,7 @@ p {
                 <th>Số lượng</th>
                 <th>Giá bán mỗi sản phẩm</th>
                 <th>Tổng tiền thu về</th>
+                <th>Số tiền tặng khách</th>
                 <th>Xóa</th>
               </tr>
             </thead>
@@ -447,6 +448,9 @@ p {
                 <td data-label="Tổng tiền thu về">
                   <input type="number" name="total_amount[]" min="1" />
                 </td>
+                <td data-label='Số tiền tặng khách'>
+                  <input type="number" name="discount_amount[]" min="0" value="0" />
+                </td>
                 <td>
                   <button type="button" onclick="removeRow(this)">Xóa</button>
                 </td>
@@ -456,13 +460,6 @@ p {
           <p style="color: #555; font-size: 14px">
             Chỉ cần nhập Tổng tiền thu về nếu không có nhập thì nhập Giá bán mỗi sản phẩm
           </p>
-          <br />
-
-          <!-- Trường nhập số tiền tặng khách -->
-          <label for="discount_amount">Số tiền tặng khách (₫):</label>          <p style="color: #555; font-size: 14px">
-            Lưu ý:Nếu không có nhập 0
-          </p>
-          <input type="number" name="discount_amount" id="discount_amount" min="0" value="0" />
 
 
           <br />
@@ -480,8 +477,7 @@ p {
         <!-- Kiểm tra nếu có kết quả tính toán -->
         {% if results %}
             <div id="product-results"></div>
-            <!-- Hiển thị số tiền tặng khách -->
-            <p><strong>Số tiền tặng khách:</strong> {{ discount_amount | int | tojson }}₫</p>
+
             <!-- Nút chuyển sản phẩm -->
             <div class="pagination-buttons">
                 <button id="prev-btn" onclick="prevProduct()" disabled>Trước</button>
@@ -546,6 +542,7 @@ p {
                           <strong>Sản phẩm:</strong> <span class="highlight">${productInfo.product_type}</span> | 
                           <strong>Số lượng:</strong> <span class="highlight">${productInfo.quantity}</span> | 
                           <strong>Giá bán mỗi sản phẩm:</strong> <span class="highlight">${productInfo.selling_price.toLocaleString()}₫</span>
+                          <strong>Số tiền tặng khách:</strong> <span class="highlight">${productInfo.discount_amount.toLocaleString()}₫</span>
                       </p>
                       <ul>
                           ${orderedKeys

@@ -106,7 +106,7 @@ def input_form():
         product_types = request.form.getlist('product_type[]')
         selling_prices = request.form.getlist('selling_price[]')
         total_amounts = request.form.getlist('total_amount[]')
-        discount_amount = float(request.form.get('discount_amount', 0))
+        discount_amounts = request.form.getlist('discount_amount[]')
 
         #Kết quả
         results = []
@@ -118,6 +118,7 @@ def input_form():
             product_type = product_types[i]
             selling_price = selling_prices[i]
             total_amount = total_amounts[i]
+            discount_amount = float(discount_amounts[i]) if discount_amounts[i] else 0  # Lấy số tiền tặng khách tương ứng
 
             # Xử lý trường hợp không có `selling_price`, dùng `total_amount`
             if selling_price:
@@ -132,7 +133,8 @@ def input_form():
                 'quantity': quantity,
                 'product_type': product_type,
                 'selling_price': selling_price,
-                'total_amount': total_amount if total_amount else selling_price * quantity
+                'total_amount': total_amount if total_amount else selling_price * quantity,
+                'discount_amount': discount_amount  # Lưu số tiền tặng khách cho từng sản phẩm
             }
             products_info.append(product_info)
 
@@ -141,7 +143,7 @@ def input_form():
             result = calculate_cost_and_commission(quantity, product_type, selling_price, discount_amount=discount_amount)
             results.append(result)
 
-        return render_template('input_form.html', results=results, products_info=products_info, discount_amount=discount_amount)
+        return render_template('input_form.html', results=results, products_info=products_info)
 
     return render_template('input_form.html')
 
