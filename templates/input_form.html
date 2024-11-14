@@ -394,9 +394,23 @@ p {
   thead tr {
     display: none;
   }
-}
-}
+  /* Đảm bảo các đoạn văn bản dài tự động xuống dòng */
+  .text-content {
+    white-space: normal; /* Cho phép xuống dòng */
+    word-wrap: break-word; /* Ngắt dòng khi cần */
+  }
 
+  /* Đảm bảo các trường nổi bật như số lượng hoặc giá không tràn khung */
+  .highlight {
+    display: inline-block; /* Giúp text xuống dòng đúng nếu quá dài */
+    padding: 2px 4px;
+    color: #4CAF50;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 4px;
+  }
+}
+}
     </style>
   </head>
   <body>
